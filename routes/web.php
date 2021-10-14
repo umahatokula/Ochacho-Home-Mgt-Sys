@@ -4,6 +4,9 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\EstateController;
+use App\Http\Controllers\PropertyGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +40,17 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 // });
 
+    // clients
+    Route::get('clients/download/reciept/{client}', [ClientController::class, 'downloadReciept'])->name('clients.downloadReciept');
     Route::resource('clients', ClientController::class);
-    // Route::get('clients', [ClientController::class, 'index'])->name('clients.index');
-    // Route::put('clients/{client}/edit', [ClientController::class, 'edit'])->name('clients.edit');
-    // Route::put('clients/{client}', [ClientController::class, 'update'])->name('clients.update');
+
+    // payments
+    Route::get('transactions/{client?}', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::get('transactions/create/{client}', [TransactionController::class, 'create'])->name('transactions.create');
+    Route::post('transactions', [TransactionController::class, 'store'])->name('transactions.store');
+
+    // estates
+    Route::resource('estates', EstateController::class);
+
+    // property-groups
+    Route::resource('property-groups', PropertyGroupController::class);

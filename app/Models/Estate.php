@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Property;
-use App\Models\Transaction;
+use App\Models\PropertyGroup;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Client extends Model
+class Estate extends Model
 {
     use HasFactory;
     use HasSlug;
@@ -35,22 +34,12 @@ class Client extends Model
     {
         return 'slug';
     }
-    
+
     /**
-     * transactions
-     *
-     * @return void
+     * The roles that belong to the user.
      */
-    public function transactions() {
-        return $this->hasMany(Transaction::class);
-    }
-    
-    /**
-     * properties
-     *
-     * @return void
-     */
-    public function properties() {
-        return $this->hasMany(Property::class);
+    public function propertyGroups()
+    {
+        return $this->belongsToMany(PropertyGroup::class)->withPivot('price');
     }
 }

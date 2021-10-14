@@ -4,6 +4,9 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Closure;
+use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,7 +40,22 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            //
+            'isModal' => (bool) $request->header('X-Inertia-Modal'),
         ]);
+    }
+
+    public function handle(Request $request, Closure $next)
+    {
+        $response = parent::handle($request, $next);
+
+        if ($response instanceof RedirectResponse && (bool) $request->header('X-Inertia-Modal-Redirect-Back')) {
+            return back(303);
+        }
+
+        if (Inertia::getShared('isModal')) {
+            $response->headers->set('X-Inertia-Modal', true);
+        }
+
+        return $response;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Client;
+use PDF;
 use Illuminate\Http\Request;
 use App\Helpers\CollectionHelper;
 use Illuminate\Support\Facades\URL;
@@ -22,6 +23,7 @@ class ClientController extends Controller
             $client->show_url = URL::route('clients.show', $client);
             $client->edit_url = URL::route('clients.edit', $client);
             $client->destroy_url = URL::route('clients.destroy', $client);
+            $client->download_reciept_url = URL::route('clients.downloadReciept', $client);
 
             return $client;
         });
@@ -61,8 +63,13 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
+        $client->show_url = URL::route('clients.show', $client);
+        $client->edit_url = URL::route('clients.edit', $client);
+        $client->destroy_url = URL::route('clients.destroy', $client);
+        $client->download_reciept_url = URL::route('clients.downloadReciept', $client);
+        
         return Inertia::render('Clients/Show', [
-            'client' => $client
+            'client' => $client->load('transactions', 'properties')
         ]);
     }
 
@@ -106,5 +113,22 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         $client->delete();
+    }
+    
+    
+    /**
+     * downloadReciept
+     *
+     * @param  mixed $client
+     * @return void
+     */
+    public function downloadReciept($clientSlug) {
+
+        $client = Client::where('slug', $clientSlug)->with('transactions')->first();
+
+        $pdf = PDF::loadView('pdf.reciept', [
+            'client' => $client
+        ]);
+        return $pdf->stream();
     }
 }

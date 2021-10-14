@@ -51,14 +51,14 @@
                                     class="selected-language d-none"></span></a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="arrow_box_right"><a href="javascript:;" class="dropdown-item py-1"><img
-                                            src="app-assets/img/flags/us.png" alt="English Flag"
+                                            src="/app-assets/img/flags/us.png" alt="English Flag"
                                             class="langimg" /><span> English</span></a><a href="javascript:;"
-                                        class="dropdown-item py-1"><img src="app-assets/img/flags/es.png"
+                                        class="dropdown-item py-1"><img src="/app-assets/img/flags/es.png"
                                             alt="Spanish Flag" class="langimg" /><span> Spanish</span></a><a
                                         href="javascript:;" class="dropdown-item py-1"><img
-                                            src="app-assets/img/flags/br.png" alt="Portuguese Flag"
+                                            src="/app-assets/img/flags/br.png" alt="Portuguese Flag"
                                             class="langimg" /><span> Portuguese</span></a><a href="javascript:;"
-                                        class="dropdown-item"><img src="app-assets/img/flags/de.png"
+                                        class="dropdown-item"><img src="/app-assets/img/flags/de.png"
                                             alt="French Flag" class="langimg" /><span> French</span></a></div>
                             </div>
                         </li>

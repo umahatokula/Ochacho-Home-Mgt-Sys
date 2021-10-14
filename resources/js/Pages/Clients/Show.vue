@@ -17,6 +17,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-block">
+                                <Link :href="route('transactions.create', client)" class="btn btn-success ma-4 float-right">
+                                    Make Payment
+                                </Link>
+                                <button @click="$inertia.visitInModal('/user/create')">Load in modal</button>
+                            </div>
+                            <div class="card-block">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="base-tabX1" data-toggle="tab"
@@ -32,107 +38,16 @@
                                     </li>
                                 </ul>
                                 <div class="tab-content px-1 pt-1">
-                                    <div role="tabpanel" class="tab-pane active" id="tab1" aria-expanded="true"
-                                        aria-labelledby="base-tabX1">
+                                    <div role="tabpanel" class="tab-pane active" id="tab1" aria-expanded="true" aria-labelledby="base-tabX1">
+                                                
+                                        <ClientProperties :client="client"></ClientProperties>
+
                                     </div>
 
                                     <div class="tab-pane" id="tab2" aria-labelledby="base-tabX2">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <div class="card-title-wrap bar-primary">
-                                                            <h4 class="card-title">Payment History</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="card-block">
-                                                            <table class="table table-sm table-bordered">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="text-center">#</th>
-                                                                        <th class="text-right">Amount</th>
-                                                                        <th class="text-center">Dr/Cr</th>
-                                                                        <th class="text-center">Date</th>
-                                                                        <th class="text-center">Action(s)</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <th scope="row" class="text-center">1</th>
-                                                                        <td class="text-right">3,000, 000.00</td>
-                                                                        <td class="text-center"><span class="badge badge-danger">dr</span></td>
-                                                                        <td class="text-center">07 Jun, 2021</td>
-                                                                        <td class="text-center">
-                                                                            <Link :href="client.show_url"  class="success p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-eye font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                            <Link :href="client.edit_url"  class="primary p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-pencil font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                            <Link :href="client.destroy_url"  class="danger p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-trash-o font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="row" class="text-center">1</th>
-                                                                        <td class="text-right">150, 000.00</td>
-                                                                        <td class="text-center"><span class="badge badge-success">cr</span></td>
-                                                                        <td class="text-center">07 Jul, 2021</td>
-                                                                        <td class="text-center">
-                                                                            <Link :href="client.show_url"  class="success p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-eye font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                            <Link :href="client.edit_url"  class="primary p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-pencil font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                            <Link :href="client.destroy_url"  class="danger p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-trash-o font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="row" class="text-center">2</th>
-                                                                        <td class="text-right">150, 000.00</td>
-                                                                        <td class="text-center"><span class="badge badge-success">cr</span></td>
-                                                                        <td class="text-center">07 Aug, 2021</td>
-                                                                        <td class="text-center">
-                                                                            <Link :href="client.show_url"  class="success p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-eye font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                            <Link :href="client.edit_url"  class="primary p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-pencil font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                            <Link :href="client.destroy_url"  class="danger p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-trash-o font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="row" class="text-center">3</th>
-                                                                        <td class="text-right">150, 000.00</td>
-                                                                        <td class="text-center"><span class="badge badge-success">cr</span></td>
-                                                                        <td class="text-center">07 Sep, 2021</td>
-                                                                        <td class="text-center">
-                                                                            <Link :href="client.show_url"  class="success p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-eye font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                            <Link :href="client.edit_url"  class="primary p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-pencil font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                            <Link :href="client.destroy_url"  class="danger p-0" data-original-title="" title="">
-                                                                                <i class="fa fa-trash-o font-medium-3 mr-2"></i>
-                                                                            </Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
+                                        <ClientPayments :client="client"></ClientPayments>
+
                                     </div>
 
                                     <div class="tab-pane" id="tab3" aria-labelledby="base-tabX3">
@@ -149,7 +64,7 @@
                                                             <div class="card-block">
                                                                 <div class="align-self-center halfway-fab text-center">
                                                                     <a class="profile-image">
-                                                                        <img src="" class="rounded-circle img-border gradient-summer width-100" alt="Card image">
+                                                                        <img src="/app-assets/img/portrait/medium/avatar-m-9.jpg" class="rounded-circle img-border gradient-summer width-100" alt="Card image">
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -235,6 +150,8 @@
     import {
         Link
     } from '@inertiajs/inertia-vue3';
+    import ClientPayments from "@/Pages/Payments/ClientPayments"
+    import ClientProperties from "@/Pages/Clients/ClientProperties"
 
     export default defineComponent({
         props: {
@@ -245,6 +162,8 @@
             AppLayout,
             Pagination,
             Link,
+            ClientPayments,
+            ClientProperties,
         },
     })
 
